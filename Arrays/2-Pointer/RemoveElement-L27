@@ -1,0 +1,30 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int left = 0;   // writer pointer: where the valid number goes
+        int right = 0;  // reader pointer: scans every number
+
+        // Example: nums = [3, 2, 2, 3], val = 3  -->  Result: [2, 2], return 2
+
+        while (right < nums.length) { // Check the fastest moving pointer (right)
+
+            if (nums[right] == val) { 
+                // Step 1: nums[0] == 3 (matches val = 3) --> Duplicate/Target to remove!
+                // Skip it! Do NOT save it.
+                right++; 
+                // Array: [3, 2, 2, 3]
+                //           right = 1
+
+            } else {
+                // Step 2: nums[1] = 2 != 3 (Valid number found!)
+                // Save it at 'left' position:
+                nums[left] = nums[right]; // nums[0] = 2
+                left++;                   // left becomes 1
+                right++;                  // right becomes 2
+                // Array: [2, 2, 2, 3]
+                //           left
+            }
+        }
+
+        return left; // Returns 2 (No +1 needed because left already counted each saved item)
+    }
+}
