@@ -1,0 +1,37 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+
+        int n = nums.length;
+
+        int minCap = 0;
+        int maxcap =0;
+
+        for(int num : nums){
+            minCap = Math.max(minCap, num);
+            maxcap += num;
+        }
+
+        while( minCap < maxcap){
+
+            int mid = minCap+ (maxcap-minCap)/2;
+            int sum =0;
+            int d =1;
+            for(int num: nums){
+                if(sum + num  > mid){
+                    d++;
+                    sum =0;
+                }
+                sum+= num;
+            }
+
+            if(d > k){
+                minCap = mid+1;
+            }else{
+                maxcap = mid;
+            }
+        }
+
+        return minCap;
+        
+    }
+}
